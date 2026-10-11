@@ -1,0 +1,12 @@
+<launch>
+  <arg name="frequency_hz" default="1.0"/>
+  <arg name="threshold_m" default="0.8"/>
+
+  <node pkg="distance_nodes" exec="distance_publisher" output="screen">
+    <param name="frequency_hz" value="$(var frequency_hz)"/>
+  </node>
+
+  <node pkg="distance_nodes" exec="distance_monitor" output="screen">
+    <param name="threshold_m" value="$(var threshold_m)"/>
+  </node>
+</launch>
