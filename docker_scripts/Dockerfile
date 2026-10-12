@@ -44,7 +44,13 @@ RUN echo "export GZ_SIM_RESOURCE_PATH=~/ros2_ws/src/ros2_iiwa/iiwa_description/g
 
 USER root
 RUN apt-get upgrade -y && apt-get update -y
-RUN apt-get install ros-humble-xacro
+RUN apt-get install -y ros-humble-xacro \
+    ros-humble-rviz2 \
+    ros-humble-turtle-tf2-py \
+    ros-humble-tf2-ros \
+    ros-humble-tf2-tools \
+    ros-humble-turtlesim \
+    ros-humble-plotjuggler-ros
 USER user
 
 #Clean image
