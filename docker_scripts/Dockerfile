@@ -7,6 +7,13 @@ FROM osrf/ros:humble-desktop
 #Install essential
 RUN apt-get update && apt-get install -y
 
+##Gazebo ignition
+RUN apt-get install -y lsb-release gnupg
+RUN sudo curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+RUN apt-get update
+RUN apt-get install -y ignition-fortress
+
 #Environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DISPLAY=:0
@@ -50,7 +57,15 @@ RUN apt-get install -y ros-humble-xacro \
     ros-humble-tf2-ros \
     ros-humble-tf2-tools \
     ros-humble-turtlesim \
-    ros-humble-plotjuggler-ros
+    ros-humble-plotjuggler-ros \
+    ros-humble-urdf-tutorial \ 
+    ros-humble-ros-ign-bridge \
+    ros-humble-ros-gz \
+    ros-humble-controller-manager \
+    ros-humble-ros2-control \
+    ros-humble-ros2-controllers \
+    ros-humble-ign-ros2-control \
+    ros-humble-joint-state-publisher
 USER user
 
 #Clean image
